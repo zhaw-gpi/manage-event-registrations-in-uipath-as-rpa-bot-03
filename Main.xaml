@@ -8,7 +8,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1219,2276</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1219,1156</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -112,7 +112,7 @@
       <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="628,2211" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="568,1091" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="RegistrationsDataTable" />
       <Variable x:TypeArguments="sd:DataTable" Name="ToProcessDataTable" />
@@ -123,13 +123,14 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence DisplayName="Informationen aus Anmelde-Verwaltung auslesen" sap:VirtualizedContainerService.HintSize="586,81" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence DisplayName="Informationen aus Anmelde-Verwaltung auslesen" sap:VirtualizedContainerService.HintSize="526,81" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
+      <ui:ReportStatus DisplayName="Report Status" sap:VirtualizedContainerService.HintSize="388,67" sap2010:WorkflowViewState.IdRef="ReportStatus_1" StatusText="[&quot;Lese Informationen aus &quot; + ExcelPath]" />
       <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[RegistrationsDataTable]" DisplayName="Komplette Excel-Tabelle auslesen" sap:VirtualizedContainerService.HintSize="388,88" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Anmeldungen" WorkbookPath="[ExcelPath]" />
       <ui:FilterDataTable DataTable="[RegistrationsDataTable]" DisplayName="Filtern der zu prozessierenden Anmeldungen" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="388,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[ToProcessDataTable]" SelectColumnsMode="Remove">
         <ui:FilterDataTable.Filters>
@@ -187,7 +188,7 @@
         </sap:WorkflowViewStateService.ViewState>
       </ui:FilterDataTable>
     </Sequence>
-    <If Condition="[ToProcessDataTable.RowCount.Equals(0)]" DisplayName="Wenn keine Personen zu bearbeiten sind, Workflow hier beenden" sap:VirtualizedContainerService.HintSize="586,52" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[ToProcessDataTable.RowCount.Equals(0)]" DisplayName="Wenn keine Personen zu bearbeiten sind, Workflow hier beenden" sap:VirtualizedContainerService.HintSize="526,52" sap2010:WorkflowViewState.IdRef="If_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -208,45 +209,43 @@
         <Sequence sap2010:WorkflowViewState.IdRef="Sequence_4" />
       </If.Else>
     </If>
-    <If Condition="[EventFee &gt; 0 AndAlso ToAcceptDataTable.RowCount &gt; 0]" DisplayName="Anlass kostenpflichtig und mind. eine bestätigte Anmeldung?" sap:VirtualizedContainerService.HintSize="586,52" sap2010:WorkflowViewState.IdRef="If_2">
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-      <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="492,662" sap2010:WorkflowViewState.IdRef="Sequence_5">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <Sequence DisplayName="Excel für Buchhaltung aufbereiten und senden" sap:VirtualizedContainerService.HintSize="450,574" sap2010:WorkflowViewState.IdRef="Sequence_7">
+    <umab:GmailApplicationCard ConnectionAccountName="{x:Null}" ConnectionId="{x:Null}" Account="vqsuda@gmail.com" DisplayName="Use Gmail" EmailAddress="vqsuda@gmail.com" sap:VirtualizedContainerService.HintSize="526,441" sap2010:WorkflowViewState.IdRef="GmailApplicationCard_3" Timeout="90" UseConnectionService="False">
+      <umab:GmailApplicationCard.Body>
+        <ActivityAction x:TypeArguments="um:IMailQuickHandle">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="um:IMailQuickHandle" Name="Gmail" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="492,261" sap2010:WorkflowViewState.IdRef="Sequence_18">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:AddDataColumn x:TypeArguments="x:Int32" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="Rechnungsbetrag" DataTable="[ToAcceptDataTable]" DefaultValue="[EventFee]" DisplayName="Rechnungsbetrag-Spalte hinzufügen" sap:VirtualizedContainerService.HintSize="388,186" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_2" />
-            <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[ToAcceptDataTable]" DisplayName="Datentabelle in neue temporäre Excel-Datei schreiben" sap:VirtualizedContainerService.HintSize="388,116" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Anmeldungen" WorkbookPath="InRechnungZuStellen.xlsx" />
-            <umab:GmailApplicationCard Account="vqsuda@gmail.com" ConnectionAccountName="vqsuda@gmail.com" ConnectionId="c0dc6315-6c03-4433-880e-ca83487dd122" DisplayName="Excel an Buchhaltung senden" EmailAddress="vqsuda@gmail.com" sap:VirtualizedContainerService.HintSize="388,81" sap2010:WorkflowViewState.IdRef="GmailApplicationCard_1" Timeout="90" UseConnectionService="True">
-              <umab:GmailApplicationCard.Body>
-                <ActivityAction x:TypeArguments="um:IMailQuickHandle">
-                  <ActivityAction.Argument>
-                    <DelegateInArgument x:TypeArguments="um:IMailQuickHandle" Name="Gmail" />
-                  </ActivityAction.Argument>
-                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="476,491" sap2010:WorkflowViewState.IdRef="Sequence_8">
-                    <Sequence.Variables>
-                      <Variable x:TypeArguments="x:String" Name="finalMailSubject" />
-                      <Variable x:TypeArguments="x:String" Name="finalMailBody" />
-                    </Sequence.Variables>
+            <If Condition="[EventFee &gt; 0 AndAlso ToAcceptDataTable.RowCount &gt; 0]" DisplayName="Anlass kostenpflichtig und mind. eine bestätigte Anmeldung?" sap:VirtualizedContainerService.HintSize="450,52" sap2010:WorkflowViewState.IdRef="If_3">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="538,1191" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Sequence DisplayName="Excel für Buchhaltung aufbereiten und senden" sap:VirtualizedContainerService.HintSize="496,1103" sap2010:WorkflowViewState.IdRef="Sequence_7">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <umab:SendMailX Bcc="{x:Null}" Body="{x:Null}" Cc="{x:Null}" HtmlBodyFromText="{x:Null}" ReplyTo="{x:Null}" Account="[Gmail]" DisplayName="Send Email" sap:VirtualizedContainerService.HintSize="434,403" sap2010:WorkflowViewState.IdRef="SendMailX_1" Importance="Normal" IsDraft="False" MaxBodyDocumentSizeMB="2" Sensitivity="Normal" Subject="Zu verrechnende Anmeldungen" To="[MailAccounting]" UseDocumentAsBody="False">
+                    <ui:ReportStatus DisplayName="Report Status" sap:VirtualizedContainerService.HintSize="434,67" sap2010:WorkflowViewState.IdRef="ReportStatus_2" StatusText="[&quot;Bereite Excel-Datei für Buchhaltung vor&quot;]" />
+                    <ui:AddDataColumn x:TypeArguments="x:Int32" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="Rechnungsbetrag" DataTable="[ToAcceptDataTable]" DefaultValue="[EventFee]" DisplayName="Rechnungsbetrag-Spalte hinzufügen" sap:VirtualizedContainerService.HintSize="434,186" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_2" />
+                    <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[ToAcceptDataTable]" DisplayName="Datentabelle in neue temporäre Excel-Datei schreiben" sap:VirtualizedContainerService.HintSize="434,116" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Anmeldungen" WorkbookPath="InRechnungZuStellen.xlsx" />
+                    <ui:ReportStatus DisplayName="Report Status" sap:VirtualizedContainerService.HintSize="434,67" sap2010:WorkflowViewState.IdRef="ReportStatus_3" StatusText="[&quot;Sende Excel-Datei an Buchhaltungsabteilung: &quot; + MailAccounting]" />
+                    <umab:SendMailX Bcc="{x:Null}" Body="{x:Null}" Cc="{x:Null}" HtmlBodyFromText="{x:Null}" ReplyTo="{x:Null}" Account="[Gmail]" DisplayName="Send Email" sap:VirtualizedContainerService.HintSize="434,396" sap2010:WorkflowViewState.IdRef="SendMailX_1" Importance="Normal" IsDraft="False" MaxBodyDocumentSizeMB="2" Sensitivity="Normal" Subject="Zu verrechnende Anmeldungen" To="[MailAccounting]" UseDocumentAsBody="False">
                       <umab:SendMailX.Files>
                         <scg:List x:TypeArguments="InArgument(x:String)" Capacity="1">
                           <InArgument x:TypeArguments="x:String">InRechnungZuStellen.xlsx</InArgument>
@@ -266,107 +265,88 @@
                       </umab:SendMailX.HtmlBodyFromFile>
                     </umab:SendMailX>
                   </Sequence>
-                </ActivityAction>
-              </umab:GmailApplicationCard.Body>
-              <umab:GmailApplicationCard.ClientId>
-                <InArgument x:TypeArguments="x:String">
-                  <Literal x:TypeArguments="x:String" Value="" />
-                </InArgument>
-              </umab:GmailApplicationCard.ClientId>
-              <umab:GmailApplicationCard.ClientSecret>
-                <InArgument x:TypeArguments="x:String">
-                  <Literal x:TypeArguments="x:String" Value="" />
-                </InArgument>
-              </umab:GmailApplicationCard.ClientSecret>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_6" />
+              </If.Else>
+            </If>
+            <Sequence DisplayName="Bestätigung oder Ablehnung senden" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_19">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-            </umab:GmailApplicationCard>
-          </Sequence>
-        </Sequence>
-      </If.Then>
-      <If.Else>
-        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_6" />
-      </If.Else>
-    </If>
-    <umab:GmailApplicationCard Account="vqsuda@gmail.com" ConnectionAccountName="vqsuda@gmail.com" ConnectionId="c0dc6315-6c03-4433-880e-ca83487dd122" DisplayName="Bestätigung oder Ablehnung senden" EmailAddress="vqsuda@gmail.com" sap:VirtualizedContainerService.HintSize="586,1451" sap2010:WorkflowViewState.IdRef="GmailApplicationCard_2" Timeout="90" UseConnectionService="True">
-      <umab:GmailApplicationCard.Body>
-        <ActivityAction x:TypeArguments="um:IMailQuickHandle">
-          <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="um:IMailQuickHandle" Name="Gmail" />
-          </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="552,1271" sap2010:WorkflowViewState.IdRef="Sequence_9">
-            <Sequence.Variables>
-              <Variable x:TypeArguments="x:String" Name="finalMailSubject" />
-              <Variable x:TypeArguments="x:String" Name="finalMailBody" />
-            </Sequence.Variables>
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[ToProcessDataTable]" DisplayName="Für jede zu verarbeitende Anmeldung" sap:VirtualizedContainerService.HintSize="510,1183" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
-              <ui:ForEachRow.Body>
-                <ActivityAction x:TypeArguments="sd:DataRow">
-                  <ActivityAction.Argument>
-                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
-                  </ActivityAction.Argument>
-                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="476,1066" sap2010:WorkflowViewState.IdRef="Sequence_10">
-                    <Sequence.Variables>
-                      <Variable x:TypeArguments="x:String" Name="status" />
-                    </Sequence.Variables>
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                    <Assign DisplayName="Status als lokale Variable speichern" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_3">
-                      <Assign.To>
-                        <OutArgument x:TypeArguments="x:String">[status]</OutArgument>
-                      </Assign.To>
-                      <Assign.Value>
-                        <InArgument x:TypeArguments="x:String">[CurrentRow("Status").ToString]</InArgument>
-                      </Assign.Value>
-                    </Assign>
-                    <Assign DisplayName="Subjekt des Mails zusammenbauen" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_1">
-                      <Assign.To>
-                        <OutArgument x:TypeArguments="x:String">[finalMailSubject]</OutArgument>
-                      </Assign.To>
-                      <Assign.Value>
-                        <InArgument x:TypeArguments="x:String">[If(status.Equals("BESTAETIGEN"), "Anmeldebestätigung", "Anmeldeablehnung") + " für " + CurrentRow("Event").ToString]</InArgument>
-                      </Assign.Value>
-                    </Assign>
-                    <Assign DisplayName="Inhalt des Mails zusammenbauen" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_4">
-                      <Assign.To>
-                        <OutArgument x:TypeArguments="x:String">[finalMailBody]</OutArgument>
-                      </Assign.To>
-                      <Assign.Value>
-                        <InArgument x:TypeArguments="x:String">[If(status.Equals("BESTAETIGEN"),"Sie wurden erfolgreich angemeldet.", "Sie konnten nicht erfolgreich angemeldet werden.") + If(CurrentRow("Persoenliche Nachricht").ToString.Length&gt;0,Environment.NewLine + Environment.NewLine + "Das Event-Management hat folgende Bemerkungen angefügt: " + CurrentRow("Persoenliche Nachricht").ToString,"")]</InArgument>
-                      </Assign.Value>
-                    </Assign>
-                    <umab:SendMailX Bcc="{x:Null}" Cc="{x:Null}" HtmlBodyFromText="{x:Null}" ReplyTo="{x:Null}" Account="[Gmail]" Body="[finalMailBody]" BodyType="Text" DisplayName="Send Email" sap:VirtualizedContainerService.HintSize="434,380" sap2010:WorkflowViewState.IdRef="SendMailX_2" Importance="Normal" IsDraft="False" MaxBodyDocumentSizeMB="2" Sensitivity="Normal" Subject="[finalMailSubject]" To="[CurrentRow(&quot;Mail-Adresse&quot;).ToString]" UseDocumentAsBody="False">
-                      <umab:SendMailX.Files>
-                        <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
-                      </umab:SendMailX.Files>
-                      <umab:SendMailX.HtmlBodyFromFile>
-                        <umabh:HtmlContentArgument FilePath="{x:Null}">
-                          <umabh:HtmlContentArgument.RuntimeImages>
-                            <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
-                          </umabh:HtmlContentArgument.RuntimeImages>
-                          <umabh:HtmlContentArgument.ValueMappings>
-                            <scg:List x:TypeArguments="umabh:HtmlValueMappingBase" Capacity="0" />
-                          </umabh:HtmlContentArgument.ValueMappings>
-                        </umabh:HtmlContentArgument>
-                      </umab:SendMailX.HtmlBodyFromFile>
-                    </umab:SendMailX>
-                    <ui:UpdateRowItem ColumnIndex="{x:Null}" ColumnName="Status" DisplayName="Status aktualisieren auf BESTAETIGT oder ABGELEHNT" sap:VirtualizedContainerService.HintSize="434,192" sap2010:WorkflowViewState.IdRef="UpdateRowItem_1" Row="[CurrentRow]" Value="[If(status.Equals(&quot;BESTAETIGEN&quot;),&quot;BESTAETIGT&quot;,&quot;ABGELEHNT&quot;)]" />
-                  </Sequence>
-                </ActivityAction>
-              </ui:ForEachRow.Body>
-            </ui:ForEachRow>
+              <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[ToProcessDataTable]" DisplayName="Für jede zu verarbeitende Anmeldung" sap:VirtualizedContainerService.HintSize="510,1290" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+                <ui:ForEachRow.Body>
+                  <ActivityAction x:TypeArguments="sd:DataRow">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="476,1173" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="x:String" Name="status" />
+                        <Variable x:TypeArguments="x:String" Name="finalMailSubject" />
+                        <Variable x:TypeArguments="x:String" Name="finalMailBody" />
+                      </Sequence.Variables>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:ReportStatus DisplayName="Report Status" sap:VirtualizedContainerService.HintSize="434,67" sap2010:WorkflowViewState.IdRef="ReportStatus_4" StatusText="[&quot;Sende E-Mail an Teilnehmer:in &quot; + CurrentRow(&quot;Mail-Adresse&quot;).ToString]" />
+                      <Assign DisplayName="Status als lokale Variable speichern" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_3">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[status]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[CurrentRow("Status").ToString]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <Assign DisplayName="Subjekt des Mails zusammenbauen" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_1">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[finalMailSubject]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[If(status.Equals("BESTAETIGEN"), "Anmeldebestätigung", "Anmeldeablehnung") + " für " + CurrentRow("Event").ToString]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <Assign DisplayName="Inhalt des Mails zusammenbauen" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_4">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[finalMailBody]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[If(status.Equals("BESTAETIGEN"),"Sie wurden erfolgreich angemeldet.", "Sie konnten nicht erfolgreich angemeldet werden.") + If(CurrentRow("Persoenliche Nachricht").ToString.Length&gt;0,Environment.NewLine + Environment.NewLine + "Das Event-Management hat folgende Bemerkungen angefügt: " + CurrentRow("Persoenliche Nachricht").ToString,"")]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <umab:SendMailX Bcc="{x:Null}" Cc="{x:Null}" HtmlBodyFromText="{x:Null}" ReplyTo="{x:Null}" Account="[Gmail]" Body="[finalMailBody]" BodyType="Text" DisplayName="Send Email" sap:VirtualizedContainerService.HintSize="434,380" sap2010:WorkflowViewState.IdRef="SendMailX_2" Importance="Normal" IsDraft="False" MaxBodyDocumentSizeMB="2" Sensitivity="Normal" Subject="[finalMailSubject]" To="[CurrentRow(&quot;Mail-Adresse&quot;).ToString]" UseDocumentAsBody="False">
+                        <umab:SendMailX.Files>
+                          <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+                        </umab:SendMailX.Files>
+                        <umab:SendMailX.HtmlBodyFromFile>
+                          <umabh:HtmlContentArgument FilePath="{x:Null}">
+                            <umabh:HtmlContentArgument.RuntimeImages>
+                              <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+                            </umabh:HtmlContentArgument.RuntimeImages>
+                            <umabh:HtmlContentArgument.ValueMappings>
+                              <scg:List x:TypeArguments="umabh:HtmlValueMappingBase" Capacity="0" />
+                            </umabh:HtmlContentArgument.ValueMappings>
+                          </umabh:HtmlContentArgument>
+                        </umab:SendMailX.HtmlBodyFromFile>
+                      </umab:SendMailX>
+                      <ui:UpdateRowItem ColumnIndex="{x:Null}" ColumnName="Status" DisplayName="Status aktualisieren auf BESTAETIGT oder ABGELEHNT" sap:VirtualizedContainerService.HintSize="434,192" sap2010:WorkflowViewState.IdRef="UpdateRowItem_1" Row="[CurrentRow]" Value="[If(status.Equals(&quot;BESTAETIGEN&quot;),&quot;BESTAETIGT&quot;,&quot;ABGELEHNT&quot;)]" />
+                    </Sequence>
+                  </ActivityAction>
+                </ui:ForEachRow.Body>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:ForEachRow>
+            </Sequence>
           </Sequence>
         </ActivityAction>
       </umab:GmailApplicationCard.Body>
@@ -380,20 +360,15 @@
           <Literal x:TypeArguments="x:String" Value="" />
         </InArgument>
       </umab:GmailApplicationCard.ClientSecret>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
     </umab:GmailApplicationCard>
-    <Sequence DisplayName="Anmelde-Verwaltung aktualisieren" sap:VirtualizedContainerService.HintSize="586,81" sap2010:WorkflowViewState.IdRef="Sequence_15">
+    <Sequence DisplayName="Anmelde-Verwaltung aktualisieren" sap:VirtualizedContainerService.HintSize="526,81" sap2010:WorkflowViewState.IdRef="Sequence_15">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
+      <ui:ReportStatus DisplayName="Report Status" sap:VirtualizedContainerService.HintSize="738,67" sap2010:WorkflowViewState.IdRef="ReportStatus_5" StatusText="[&quot;Aktualisiere Status pro verarbeiteter Anmeldung in &quot; + ExcelPath]" />
       <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ProcessMode="{x:Null}" DisplayName="Excel Process Scope" sap:VirtualizedContainerService.HintSize="738,2023" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_1" ShowExcelWindow="False">
         <ueab:ExcelProcessScopeX.Body>
           <ActivityAction x:TypeArguments="ui:IExcelProcess">
@@ -563,7 +538,7 @@
         </ueab:ExcelProcessScopeX.Body>
       </ueab:ExcelProcessScopeX>
     </Sequence>
-    <Sequence DisplayName="Anmelde-Verwaltung öffnen" sap:VirtualizedContainerService.HintSize="586,81" sap2010:WorkflowViewState.IdRef="Sequence_16">
+    <Sequence DisplayName="Anmelde-Verwaltung öffnen" sap:VirtualizedContainerService.HintSize="526,81" sap2010:WorkflowViewState.IdRef="Sequence_16">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -572,6 +547,6 @@
       </sap:WorkflowViewStateService.ViewState>
       <ui:StartProcess Arguments="{x:Null}" WorkingDirectory="{x:Null}" DisplayName="Excel-Datei öffnen (Start Process)" FileName="[ExcelPath]" sap:VirtualizedContainerService.HintSize="388,88" sap2010:WorkflowViewState.IdRef="StartProcess_1" />
     </Sequence>
-    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" Buttons="Ok" DisplayName="Anmeldungen verarbeitet" sap:VirtualizedContainerService.HintSize="586,85" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;Anmeldungen verarbeitet&quot;]" TopMost="True" />
+    <ui:ReportStatus DisplayName="Anmeldungen verarbeitet" sap:VirtualizedContainerService.HintSize="526,67" sap2010:WorkflowViewState.IdRef="ReportStatus_6" StatusText="[&quot;Anmeldungen verarbeitet&quot;]" />
   </Sequence>
 </Activity>
